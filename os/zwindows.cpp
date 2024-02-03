@@ -1,4 +1,5 @@
 #include "zwindows.h"
+#include <cstring>
 
 const std::string  getTimestamp(const bool isPrint) {
     static std::string T(30, '\0');
@@ -13,7 +14,7 @@ const std::string  getTimestamp(const bool isPrint) {
         struct tm timeinfo;
         time(&rawtime);
         localtime_s(&timeinfo, &rawtime);
-        strftime(&T[0], 30, "[%d-%m-%y] [%H:%M:%S] ", &tm);
+        strftime(&T[0], 30, "[%d-%m-%y] [%H:%M:%S] ", &timeinfo);
     }
 
     // [Tue Jan 30 02:54:25 2024]
