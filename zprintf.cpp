@@ -10,7 +10,7 @@
 #include "os/zmacos.h"
 #endif
 
-// Public
+// Public     
 void             Z::PRINTF(const bool is_stdout, const char* format, ...) {
     static Z        staticInstance;
 
