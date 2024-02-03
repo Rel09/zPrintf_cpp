@@ -1,23 +1,14 @@
 CC := c++
 CFLAGS := -Wall -Wextra -Werror -std=c++98 -pedantic
 
-ifeq ($(OS),Windows_NT)
 ############################# Windows #################################
+ifeq ($(OS),Windows_NT)
 	LIB := zprintf.lib
 	OS_SRC := os/zwindows.cpp
-	DO_FCLEAN := @powershell -Command "If (Test-Path '$(LIB)') { Remove-Item '$(LIB)' -Force }"
-define DO_CLEAN 
-	@for %%F in ($(OBJ)) do powershell -Command "If (Test-Path '%%F') { Remove-Item '%%F' -Force }"
-endef
 ############################# MacOS ###################################
-else
+else ifeq ($(shell uname -s), Darwin)
 	LIB := zprintf.a
-	DO_CLEAN := rm -rf $(OBJ)
-	DO_FCLEAN := rm -rf $(LIB)
-	UNAME_S := $(shell uname -s)
-	ifeq ($(UNAME_S),Darwin)
-		OS_SRC := os/zmacos.cpp
-	endif
+	OS_SRC := os/zmacos.cpp
 endif
 ########################################################################
 SRC := zprintf.cpp
@@ -30,15 +21,20 @@ $(LIB): $(OBJ)
 	@echo [-] Compiling: $<
 	@$(CC) $(CFLAGS) -c -o $@ $<
 
-fclean:
-	$(DO_CLEAN)
-	$(DO_FCLEAN)
-	@echo [+] zPrintf has been fcleaned !
+fclean: clean
+ifeq ($(OS),Windows_NT)
+	powershell -Command "If (Test-Path '$(LIB)') { Remove-Item '$(LIB)' -Force }"
+else ifeq ($(shell uname -s), Darwin)
+	@rm -rf $(LIB)
+endif
 
 clean:
-	$(DO_CLEAN)
-	@echo [+] zPrintf has been cleaned !
-
+ifeq ($(OS),Windows_NT)
+	@for %%F in ($(OBJ)) do powershell -Command "If (Test-Path '%%F') { Remove-Item '%%F' -Force }"
+else ifeq ($(shell uname -s), Darwin)
+	@rm -rf $(OBJ)
+endif
+	@echo [+] zPrintf has been Cleaned !
 
 
 .PHONY: clean
