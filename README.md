@@ -17,3 +17,4 @@ ZPRINTF is a versatile logging and printing Class for C++ programs. Was made to 
 ![ZPRINTF_CPP](https://i.imgur.com/0ALxfSz.png)
 
 ![Bonus Stuff](https://i.imgur.com/7MLBFfE.png)
+
