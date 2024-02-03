@@ -23,7 +23,7 @@ $(LIB): $(OBJ)
 
 fclean: clean
 ifeq ($(OS),Windows_NT)
-	powershell -Command "If (Test-Path '$(LIB)') { Remove-Item '$(LIB)' -Force }"
+	@powershell -Command "If (Test-Path '$(LIB)') { Remove-Item '$(LIB)' -Force }"
 else ifeq ($(shell uname -s), Darwin)
 	@rm -rf $(LIB)
 endif
