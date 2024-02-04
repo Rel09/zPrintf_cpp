@@ -2,7 +2,7 @@
 #include <fstream>
 #include <pthread.h>
 
-// ------------ Windows ------------ (GCC & MSCV Tested)
+// ------------ Windows ------------ (GCC & MSVC Tested)
 #if defined(_WIN32) || defined(_WIN64)
 #include "os/zwindows.h"
 // ------------  MacOS  ------------ (GCC Tested)
