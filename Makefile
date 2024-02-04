@@ -1,16 +1,17 @@
 CC := c++
 CFLAGS := -Wall -Wextra -Werror -std=c++98 -pedantic
 
-############################# Windows #################################
+# Windows
+# If you run this on windows, make sure you use another terminal (git bash for example)
 ifeq ($(OS),Windows_NT)
 	LIB := zprintf.lib
 	OS_SRC := os/zwindows.cpp
-############################# MacOS ###################################
+# MacOS
 else ifeq ($(shell uname -s), Darwin)
 	LIB := zprintf.a
 	OS_SRC := os/zmacos.cpp
 endif
-########################################################################
+
 SRC := zprintf.cpp
 OBJ := $(SRC:.cpp=.o) $(OS_SRC:.cpp=.o)
 $(LIB): $(OBJ)
@@ -22,19 +23,10 @@ $(LIB): $(OBJ)
 	@$(CC) $(CFLAGS) -c -o $@ $<
 
 fclean: clean
-ifeq ($(OS),Windows_NT)
-	@powershell -Command "If (Test-Path '$(LIB)') { Remove-Item '$(LIB)' -Force }"
-else ifeq ($(shell uname -s), Darwin)
 	@rm -rf $(LIB)
-endif
 
 clean:
-ifeq ($(OS),Windows_NT)
-	@for %%F in ($(OBJ)) do powershell -Command "If (Test-Path '%%F') { Remove-Item '%%F' -Force }"
-else ifeq ($(shell uname -s), Darwin)
 	@rm -rf $(OBJ)
-endif
 	@echo [+] zPrintf has been Cleaned !
-
 
 .PHONY: clean
