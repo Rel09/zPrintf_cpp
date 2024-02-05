@@ -10,7 +10,7 @@ void ZPRINTF(const bool is_stdout, const char* format, ...)
 
 Currently Tested on:
 - MacOS (C++(gcc))
-- Windows (C++(mingw64), tested quickly on MSVC, but since this is no .sln file, i tested the .cpp/.h)
+- Windows (C++(mingw64), tested quickly on MSVC, but since this is no .sln file, i tested the .cpp/.h). you will also need an external terminal if you run this on windows. i use gitbash as terminal on vscode
 
 ZPRINTF is a versatile logging and printing Class for C++ programs. Was made to use at 42 Programming school, since they don't allow us to use most C function in their C++ courses.
 
