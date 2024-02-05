@@ -80,11 +80,11 @@ std::ofstream* Z::_STDERR_FILE = 0;
 std::ofstream*   Z::_selectFile(const bool is_stdout) {
     if (LOG >= 1 && LOG <= 3) {
         if ((LOG == 1 || LOG == 3) && is_stdout) {   
-            if (!_STDOUT_FILE) _STDOUT_FILE = new std::ofstream(FILENAME_STDOUT);        
+            if (!_STDOUT_FILE) _STDOUT_FILE = new std::ofstream(FILENAME_STDOUT, std::ios_base::app);        
             return _STDOUT_FILE;
         }
         else if ((LOG == 2 || LOG == 3) && !is_stdout) {  
-            if (!_STDERR_FILE) _STDERR_FILE = new std::ofstream(FILENAME_STDERR);    
+            if (!_STDERR_FILE) _STDERR_FILE = new std::ofstream(FILENAME_STDERR, std::ios_base::app);    
             return _STDERR_FILE;  
         }
     }
