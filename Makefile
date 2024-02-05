@@ -4,11 +4,11 @@ CFLAGS := -Wall -Wextra -Werror -std=c++98 -pedantic
 # Windows
 # If you run this on windows, make sure you use another terminal (git bash for example)
 ifeq ($(OS),Windows_NT)
-	LIB := zprintf.lib
+	LIB := zPrintf_cpp.lib
 	OS_SRC := os/zwindows.cpp
 # MacOS
 else ifeq ($(shell uname -s), Darwin)
-	LIB := zprintf.a
+	LIB := zPrintf_cpp.a
 	OS_SRC := os/zmacos.cpp
 endif
 
@@ -19,7 +19,7 @@ $(LIB): $(OBJ)
 	@echo [+] zPrintf Successfully Compiled!
 
 %.o: %.cpp
-	@echo [-] Compiling: $<
+	@echo [+] Compiling: $<
 	@$(CC) $(CFLAGS) -c -o $@ $<
 
 fclean: clean
